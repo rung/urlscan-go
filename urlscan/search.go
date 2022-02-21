@@ -14,8 +14,8 @@ type SearchArguments struct {
 	Query *string `json:"query"`
 	// Optional. Page size
 	Size *uint64 `json:"size"`
-	// Optional. specificied via $sort_field:$sort_order. Default: _score
-	Sort *string `json:"sort"`
+	// Optional.
+	SearchAfter *string `json:"search_after"`
 }
 
 // SearchResult represents a single search result from the API
@@ -33,6 +33,7 @@ type SearchResult struct {
 		URL     string `json:"url"`
 	} `json:"page"`
 	Result string `json:"result"`
+	Screenshot string `json:"screenshot"`
 	Stats  struct {
 		ConsoleMsgs       int64 `json:"consoleMsgs"`
 		DataLength        int64 `json:"dataLength"`
@@ -42,11 +43,13 @@ type SearchResult struct {
 	} `json:"stats"`
 	Task struct {
 		Method     string `json:"method"`
+		UUID     string `json:"uuid"`
 		Source     string `json:"source"`
 		Time       string `json:"time"`
 		URL        string `json:"url"`
 		Visibility string `json:"visibility"`
 	} `json:"task"`
+	RawSort []interface{} `json:"sort"`
 	UniqCountries int64 `json:"uniq_countries"`
 }
 
@@ -67,8 +70,8 @@ func (x *Client) Search(args SearchArguments) (SearchResponse, error) {
 	if args.Size != nil {
 		values.Add("size", fmt.Sprintf("%d", *args.Size))
 	}
-	if args.Sort != nil {
-		values.Add("sort", *args.Sort)
+	if args.SearchAfter != nil {
+		values.Add("search_after", *args.SearchAfter)
 	}
 
 	code, err := x.get("search", values, &result)
@@ -80,4 +83,17 @@ func (x *Client) Search(args SearchArguments) (SearchResponse, error) {
 	}
 
 	return result, err
+}
+
+func NormalizeSort(rawSort []interface{}) (string, error) {
+	number, ok := rawSort[0].(float64)
+	if !ok {
+		return "", errors.Errorf("Failed to normalize sort")
+	}
+	uuid, ok := rawSort[1].(string)
+	if !ok {
+		return "", errors.Errorf("Failed to normalize sort")
+	}
+
+	return fmt.Sprintf("%d,%s", uint64(number), uuid), nil
 }
