@@ -1,4 +1,4 @@
-module github.com/m-mizutani/urlscan-go
+module github.com/rung/urlscan-go
 
 go 1.14
 

@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/m-mizutani/urlscan-go/urlscan"
+	"github.com/rung/urlscan-go/urlscan"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/require"
 )

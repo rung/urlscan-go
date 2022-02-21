@@ -2,8 +2,7 @@ package urlscan_test
 
 import (
 	"testing"
-
-	"github.com/m-mizutani/urlscan-go/urlscan"
+	"github.com/rung/urlscan-go/urlscan"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

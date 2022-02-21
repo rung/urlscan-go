@@ -3,8 +3,7 @@ package urlscan_test
 import (
 	"fmt"
 	"log"
-
-	"github.com/m-mizutani/urlscan-go/urlscan"
+	"github.com/rung/urlscan-go/urlscan"
 )
 
 func ExampleClient_Submit() {
