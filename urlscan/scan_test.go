@@ -2,11 +2,11 @@ package urlscan_test
 
 import (
 	"encoding/json"
+	"github.com/rung/urlscan-go/urlscan"
+	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"os"
 	"testing"
-	"github.com/rung/urlscan-go/urlscan"
-	"github.com/stretchr/testify/require"
 )
 
 func TestResult(t *testing.T) {
@@ -25,5 +25,4 @@ func TestResult(t *testing.T) {
 	var result urlscan.ScanResult
 	err = json.Unmarshal(buf, &result)
 	require.NoError(t, err)
-
 }

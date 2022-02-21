@@ -2,9 +2,8 @@ package urlscan
 
 import (
 	"fmt"
-	"net/url"
-
 	"github.com/pkg/errors"
+	"net/url"
 )
 
 // SearchArguments is input data structure of Search()
