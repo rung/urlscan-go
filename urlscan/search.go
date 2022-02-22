@@ -19,8 +19,9 @@ type SearchArguments struct {
 
 // SearchResult represents a single search result from the API
 type SearchResult struct {
-	ID   string `json:"_id"`
-	Page struct {
+	IndexedAt string `json:"indexedAt"`
+	ID        string `json:"_id"`
+	Page      struct {
 		Asn     string `json:"asn"`
 		Asnname string `json:"asnname"`
 		City    string `json:"city"`
@@ -31,9 +32,9 @@ type SearchResult struct {
 		Server  string `json:"server"`
 		URL     string `json:"url"`
 	} `json:"page"`
-	Result string `json:"result"`
+	Result     string `json:"result"`
 	Screenshot string `json:"screenshot"`
-	Stats  struct {
+	Stats      struct {
 		ConsoleMsgs       int64 `json:"consoleMsgs"`
 		DataLength        int64 `json:"dataLength"`
 		EncodedDataLength int64 `json:"encodedDataLength"`
@@ -42,14 +43,14 @@ type SearchResult struct {
 	} `json:"stats"`
 	Task struct {
 		Method     string `json:"method"`
-		UUID     string `json:"uuid"`
+		UUID       string `json:"uuid"`
 		Source     string `json:"source"`
 		Time       string `json:"time"`
 		URL        string `json:"url"`
 		Visibility string `json:"visibility"`
 	} `json:"task"`
-	RawSort []interface{} `json:"sort"`
-	UniqCountries int64 `json:"uniq_countries"`
+	RawSort       []interface{} `json:"sort"`
+	UniqCountries int64         `json:"uniq_countries"`
 }
 
 // SearchResponse is returned by Search() and including existing scan results.
